@@ -86,5 +86,5 @@ relationOnPairs (\(x, y) -> x > y) [(1, 3), (3, 1), (4, 2), (6, 7), (8, 5)]
 
 This is equivalent to the mathematical expression:
 
-$$ R = \set{(x, y) | x > y} \\
- R \subseteq \set{(1, 3), (3, 1), (4, 2), (6, 7), (8, 5)} = \set{(3,1),(4,2),(8,5)} $$
+$$ R = \set{(x, y) | x > y} $$
+$$ R \subseteq \set{(1, 3), (3, 1), (4, 2), (6, 7), (8, 5)} = \set{(3,1),(4,2),(8,5)} $$
