@@ -106,3 +106,124 @@ This is equivalent to the mathematical expression:
 $$ R = \set{(x, y) | x > y} $$
 $$ A = \set{1, 2, 3} $$
 $$ R \subseteq A \times A = \set{(2,1),(3,1),(3,2)} $$
+
+### `extrapolateSetFromPairs`
+```hs
+extrapolateSetFromPairs :: Eq a => Set (a, a) -> Set a
+```
+
+Takes a set of pairs and extracts their unique elements.
+
+```hs
+extrapolateSetFromPairs [(1,2), (2,1), (3,4), (3,2)]
+-- [1,4,3,2]
+```
+### `isReflexive`
+```hs
+isReflexive :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is reflexive.
+
+```hs
+isReflexive [(1,1), (2,3)]
+-- False
+isReflexive [(1,1), (2,3), (2,2), (3,3)]
+-- True
+isReflexive $ relationOnSet (\(x, y) -> x == y) [1..5]
+-- True
+```
+
+### `isSymmetric`
+```hs
+isSymmetric :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is symmetric.
+
+```hs
+isSymmetric [(1,1), (2,3), (1,4)]
+-- False
+isSymmetric [(1,1), (2,3), (1,4), (3,2), (4,1)]
+-- True
+isSymmetric $ relationOnSet (\(x, y) -> x /= y) [1..5]
+-- True
+```
+
+### `isAntiSymmetric`
+```hs
+isAntiSymmetric :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is anti-symmetric (not to be mistaken as the opposite of symmetric!).
+
+```hs
+isAntiSymmetric [(1,1), (2,3), (1,4)]
+-- True
+isAntiSymmetric [(1,1), (2,3), (1,4), (3,2)]
+-- False
+isAntiSymmetric $ relationOnSet (\(x, y) -> x /= y) [1..5]
+-- False
+```
+
+### `isTransitive`
+```hs
+isTransitive :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is transitive.
+
+```hs
+isTransitive [(1,2), (2,3)]
+-- False
+isTransitive [(1,2), (2,3), (1,3)]
+-- True
+isTransitive $ relationOnSet (\(x, y) -> x > y) [1..5]
+-- True
+```
+
+### `isEquivalenceRelation`
+```hs
+isEquivalenceRelation :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is reflexive, symmetric, and transitive.
+
+```hs
+isEquivalenceRelation $ [(1,1), (1,2), (2,1), (2,2), (1,3), (3,1), (3,3), (2,3), (3,2)]
+-- True
+isEquivalenceRelation $ relationOnSet (\(x, y) -> x == y) [1..5]
+-- True
+```
+
+### `isPartialOrder`
+```hs
+isPartialOrder :: Eq a => Set (a, a) -> Bool
+```
+
+Checks if a set is reflexive, anti-symmetric, and transitive.
+
+```hs
+isPartialOrder $ [(1,1), (1,2), (2,2), (1,3), (3,3), (2,3)]
+-- True
+isPartialOrder $ relationOnSet (\(x, y) -> x >= y) [1..5]
+-- True
+```
+
+### `transitiveClosure`
+```hs
+transitiveClosure :: Eq a => Set (a, a) -> Set (a, a)
+```
+
+Produces the transitive closure of a set, making a non-transitive set transitive.
+
+```hs
+let set = [(1,1), (1,2), (2,1), (1,3), (3,1)]
+isTransitive set
+-- False
+let newSet = transitiveClosure $ [(1,1), (1,2), (2,1), (1,3), (3,1)]
+print newSet
+-- [(1,1),(1,2),(2,1),(1,3),(3,1),(2,2),(2,3),(3,2),(3,3)]
+isTransitive newSet
+-- True
+```
