@@ -3,7 +3,10 @@ Having had an introduction to mathematical **relations** in my Computer Science 
 
 This is programmed in the **Haskell** language partly due to it also being in my course, but also because I find it to be fitting for mathemtical things such as this.
 
-Since **unary** relations exist, it's worth noting that this project specifically focuses on **binary relations**. Maybe if I can figure out applicatives and whatnot, I can extend this to support all tiers of relations.
+My code is neither optimal in performance nor readability, but it does seem to function as intended.
+
+> [NOTE]
+> Since **unary** relations exist, it's worth noting that this project specifically focuses on **binary relations**. Maybe if I can figure out applicatives and whatnot, I can extend this to support all tiers of relations.
 
 ## Documentation
 ### `Set`
@@ -26,6 +29,13 @@ From what I've learned, a mathematical relation is essentially a function compar
 ((\(x, y) -> x > y) :: Relation Int Int) (1, 2)
 -- False
 ```
+
+### `BinaryMatrix`
+```hs
+type BinaryMatrix = [[Int]]
+```
+
+A 2-dimensional array of 1s and 0s.
 
 ### `toSet`
 ```hs
