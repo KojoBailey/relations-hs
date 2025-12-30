@@ -227,3 +227,41 @@ print newSet
 isTransitive newSet
 -- True
 ```
+
+### `binaryMatrixRelation`
+```hs
+binaryMatrixRelation :: (Eq a, Eq b) => Relation a b -> Set a -> Set b -> BinaryMatrix
+```
+
+Turns the relation between two sets into its binary matrix representation.
+
+```hs
+let r = (\(x, y) -> x > y)
+let setA = [2,3,4]
+let setB = [1,2,3]
+
+relationOnPairs r (cartesianProduct setA setB)
+-- [(2,1),(3,1),(3,2),(4,1),(4,2),(4,3)]
+binaryMatrixRelation r setA setB
+-- [[1,1,1],[0,1,1],[0,0,1]]
+```
+
+If this were to be represented in mathematically with a 2D matrix:
+
+$$ R = \set{(x, y) | x > y} $$
+$$ A = \set{2,3,4} $$
+$$ B = \set{1,2,3} $$
+$$ R \subseteq A \times B = \begin{bmatrix}
+1 & 1 & 1 \\
+0 & 1 & 1 \\
+0 & 0 & 1
+\end{bmatrix} $$
+$$ = \set{(2,1),(3,1),(4,1),(3,2),(4,2),(4,3)} $$
+
+It may also help to see it as a table:
+
+| $\times$ | **2** | **3** | **4** |
+| -------- | ----- | ----- | ----- |
+| **1**    | 1     | 1     | 1     |
+| **2**    | 0     | 1     | 1     |
+| **3**    | 0     | 0     | 1     |

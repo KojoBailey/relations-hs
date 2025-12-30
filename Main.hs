@@ -2,6 +2,8 @@ type Set a = [a]
 
 type Relation a b = ((a, b) -> Bool)
 
+type BinaryMatrix = [[Int]]
+
 toSet :: Eq a => [a] -> Set a
 toSet [] = []
 toSet (x:xs) = if x `elem` xs then toSet xs else x : toSet xs
@@ -41,3 +43,11 @@ transitiveClosure :: Eq a => Set (a, a) -> Set (a, a)
 transitiveClosure pairs
   | isTransitive pairs = toSet pairs
   | otherwise          = transitiveClosure $ pairs ++ foldr (\(x1, y1) acc1 -> foldr (\(x2, y2) acc2 -> if y1 == x2 && (x1, y2) `notElem` pairs then (x1, y2) : acc2 else acc2) [] pairs ++ acc1) [] pairs
+
+binaryMatrixRelation :: (Eq a, Eq b) => Relation a b -> Set a -> Set b -> BinaryMatrix
+binaryMatrixRelation relation setA setB = map (\y -> map (\x -> boolToBit $ (x, y) `elem` resultantSet) setA) setB
+  where resultantSet = relationOnPairs relation (cartesianProduct setA setB)
+
+boolToBit :: Bool -> Int
+boolToBit False = 0
+boolToBit True  = 1
