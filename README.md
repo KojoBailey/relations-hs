@@ -88,3 +88,21 @@ This is equivalent to the mathematical expression:
 
 $$ R = \set{(x, y) | x > y} $$
 $$ R \subseteq \set{(1, 3), (3, 1), (4, 2), (6, 7), (8, 5)} = \set{(3,1),(4,2),(8,5)} $$
+
+### `relationOnSet`
+```hs
+relationOnSet :: Relation a a -> Set a -> Set (a, a)
+```
+
+Applies a relation from a set to itself.
+
+```hs
+relationOnSet (\(x, y) -> x > y) [1..3]
+-- [(2,1),(3,1),(3,2)]
+```
+
+This is equivalent to the mathematical expression:
+
+$$ R = \set{(x, y) | x > y} $$
+$$ A = \set{1, 2, 3} $$
+$$ R \subseteq A \times A = \set{(2,1),(3,1),(3,2)} $$
