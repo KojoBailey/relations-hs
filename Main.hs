@@ -11,3 +11,6 @@ cartesianProduct set1 set2 = [(x, y) | x <- set1, y <- set2]
 
 relationOnPairs :: Relation a b -> Set (a, b) -> Set (a, b)
 relationOnPairs relation pairs = [x | x <- pairs, relation x]
+
+relationOnSet :: Relation a a -> Set a -> Set (a, a)
+relationOnSet relation set = relationOnPairs relation (cartesianProduct set set)
