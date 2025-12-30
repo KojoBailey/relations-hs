@@ -5,7 +5,7 @@ This is programmed in the **Haskell** language partly due to it also being in my
 
 My code is neither optimal in performance nor readability, but it does seem to function as intended.
 
-> [NOTE]
+> [!NOTE]
 > Since **unary** relations exist, it's worth noting that this project specifically focuses on **binary relations**. Maybe if I can figure out applicatives and whatnot, I can extend this to support all tiers of relations.
 
 ## Documentation
