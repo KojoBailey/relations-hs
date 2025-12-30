@@ -31,6 +31,9 @@ isAntiSymmetric pairs = all (\(x, y) -> x == y || (y, x) `notElem` pairs) pairs
 isTransitive :: Eq a => Set (a, a) -> Bool
 isTransitive pairs = all (\(x1, y1) -> all (\(x2, y2) -> y1 /= x2 || (x1, y2) `elem` pairs) pairs) pairs
 
+isEquivalenceRelation :: Eq a => Set (a, a) -> Bool
+isEquivalenceRelation pairs = all (\f -> f pairs) [isReflexive, isTransitive, isAntiSymmetric]
+
 transitiveClosure :: Eq a => Set (a, a) -> Set (a, a)
 transitiveClosure pairs
   | isTransitive pairs = toSet pairs
