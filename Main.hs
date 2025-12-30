@@ -32,7 +32,10 @@ isTransitive :: Eq a => Set (a, a) -> Bool
 isTransitive pairs = all (\(x1, y1) -> all (\(x2, y2) -> y1 /= x2 || (x1, y2) `elem` pairs) pairs) pairs
 
 isEquivalenceRelation :: Eq a => Set (a, a) -> Bool
-isEquivalenceRelation pairs = all (\f -> f pairs) [isReflexive, isTransitive, isAntiSymmetric]
+isEquivalenceRelation pairs = all (\f -> f pairs) [isReflexive, isTransitive, isSymmetric]
+
+isPartialOrder :: Eq a => Set (a, a) -> Bool
+isPartialOrder pairs = all (\f -> f pairs) [isReflexive, isTransitive, isAntiSymmetric]
 
 transitiveClosure :: Eq a => Set (a, a) -> Set (a, a)
 transitiveClosure pairs
